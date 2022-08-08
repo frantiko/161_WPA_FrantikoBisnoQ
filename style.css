@@ -1,0 +1,66 @@
+.body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    height: 60px;
+    width:100% ;
+    background-color: beige;
+    margin: 0;
+    padding: 0;
+    padding-top: 0;
+    
+}
+
+.logo {
+    height:20%;
+    width :40px;
+    margin: 0;
+    padding: 0;
+}
+
+.logo img{
+    height: 40px;
+    float: left;
+   
+}
+
+ul.navigation{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.navigation li{
+    float: right;
+}
+ul.navigation li a{
+    display: inline-block ;
+    padding: 8px 10px;
+    line-height: 0px;
+}
+ 
+.home {
+    float: left;
+}
+.sidebar {
+ 
+    width: 50%;
+    height: 500px;
+    float: left;
+}
+
+.content {
+    width: 50%;
+    height: 500px;
+    background-color: antiquewhite;
+    float: right;
+}
+.footer {
+    width: 100%;
+    height: 60px;
+    align-content: center;
+    background-color: burlywood;
+    clear: both;
+}
