@@ -38,7 +38,7 @@
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{total_harga}}</span>
+                                  <span class="badge bg-dark text-white ms-1 rounded-pill">{{keranjang.length}}</span>
                         </button>
                     </form>
                 </div>
@@ -67,20 +67,37 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{produk.title}}</h5>
                                     <!-- Product price-->
-                                    ${{produk.title}}
+                                    ${{produk.price}}
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#" @click="tambah(produk.price)">tambah</a></div>
-                            </div>
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="#" v-if="keranjang.findIndex(item => item === produk._id) === -1" @click="tambah(produk._id)">Tambah</a>
+                                    <a class="btn btn-outline-dark mt-auto" href="#" v-else @click="hapus(produk._id)">Hapus</a>
+                                </div>
                         </div>
+                    
                     </div>
                   
                  </div>
             </div>
         </section>
         <!-- Footer-->
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action list-group-item-dark" style="text-align: center;">Question</a>
+          </div>
+          <br>
+
+        <div class="mx-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+          <div class="mx-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Example </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+        <br>
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy;by frant 2022</p></div>
         </footer>
@@ -93,32 +110,38 @@
         <script src="https://unpkg.com/vue@3"></script>
 
         
-        <script> 
-          const { createApp } = Vue
-        
-          createApp({
-            data() {
-              return {
-                nama_toko: 'frantshop',
-                data_produk: [],
-                total_harga: 0
-              }
-            },
-            mounted() {
+        <script>
+            const { createApp } = Vue
+          
+            createApp({
+              data() {
+                return {
+                  nama_toko: 'JatimShop',
+                  data_produk: [],
+                  keranjang: []
+                }
+              },
+              mounted() {
                 fetch('https://api.storerestapi.com/products')
                 .then(response => response.json())
                 .then(response => {
                     this.data_produk = response.data
-            })
-            },
-            methods: {
-                tambah(harga) {
-                    this.total_harga += harga
+                })
+              },
+              methods: {
+                tambah(id) {
+                    this.keranjang.push(id)
+                },
+                hapus(id) {
+                    let index = this.keranjang.findIndex(item => item === id)
+                    this.keranjang.splice(index, 1)
+                },
+                cekProduk(id) {
+                    return id
                 }
-            }
-        
-          }).mount('#app')
-        </script>
+              }
+            }).mount('#app')
+          </script>
 
 
        
